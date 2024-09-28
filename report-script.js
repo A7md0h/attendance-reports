@@ -19,18 +19,19 @@ const db = getFirestore(app); // تهيئة Firestore
 window.addEventListener('DOMContentLoaded', () => {
     const reportTypeSelect = document.getElementById('report-type');
     const reportClassSelect = document.getElementById('report-class');
+    const reportPeriodSelect = document.getElementById('report-period'); // اختيار الحصة
     const reportDateInput = document.getElementById('report-date');
     const startDateInput = document.getElementById('start-date');
     const endDateInput = document.getElementById('end-date');
     const generateReportButton = document.getElementById('generate-report');
     const reportTableBody = document.getElementById('report-table').querySelector('tbody');
     const printButton = document.getElementById('print-report');
-    const downloadButton = document.getElementById('download-pdf');
 
     // دالة توليد التقرير
     async function generateReport() {
         const reportType = reportTypeSelect.value;
         const selectedClass = reportClassSelect.value;
+        const selectedPeriod = reportPeriodSelect.value; // الحصة المحددة
         const reportDate = reportDateInput.value;
         const startDate = startDateInput.value;
         const endDate = endDateInput.value;
@@ -52,7 +53,8 @@ window.addEventListener('DOMContentLoaded', () => {
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 data.students.forEach((student) => {
-                    if (student.attendance === "غياب") { // تصفية الطلاب حسب حالة الغياب فقط
+                    // التحقق من الحصة المحددة، إذا كانت "الكل" أو تطابق الحصة المحددة
+                    if ((selectedPeriod === 'all' || data.period === selectedPeriod) && student.attendance === "غياب") {
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td>${student.name}</td>
@@ -76,34 +78,8 @@ window.addEventListener('DOMContentLoaded', () => {
         window.print(); // فتح نافذة الطباعة
     }
 
-    // دالة تنزيل التقرير كملف PDF
-    function downloadPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        // إضافة عنوان التقرير
-        doc.text("تقرير الحضور والغياب", 10, 10);
-
-        // إضافة محتوى التقرير من الجدول
-        let y = 20;
-        doc.text("اسم الطالب | الصف | الشعبة | التاريخ | الحصة | الحالة", 10, y);
-        y += 10;
-
-        const rows = reportTableBody.querySelectorAll('tr');
-        rows.forEach((row) => {
-            const cells = row.querySelectorAll('td');
-            const rowText = Array.from(cells).map(cell => cell.textContent).join(" | ");
-            doc.text(rowText, 10, y);
-            y += 10;
-        });
-
-        // تنزيل الملف
-        doc.save('تقرير-الحضور-والغياب.pdf');
-    }
-
-    // ربط أزرار الطباعة وتنزيل PDF
+    // ربط أزرار الطباعة
     printButton.addEventListener('click', printReport);
-    downloadButton.addEventListener('click', downloadPDF);
 
     // حدث عند الضغط على زر توليد التقرير
     generateReportButton.addEventListener('click', generateReport);
