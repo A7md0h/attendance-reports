@@ -1,71 +1,99 @@
+/* تنسيق عام للصفحة */
+body {
+    font-family: 'Cairo', sans-serif; /* خط احترافي يدعم العربية */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* خلفية الصفحة */
+    color: #333; /* لون النص */
+}
+
 /* تنسيق الترويسة */
 .header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 20px;
     border-bottom: 2px solid #ccc;
-    background-color: #f4f4f4; /* خلفية فاتحة للترويسة */
+    background-color: #3f51b5; /* لون خلفية احترافي */
+    color: #fff; /* لون النص */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ظل خفيف */
 }
 
 .school-logo {
-    width: 100px; /* حجم الشعار */
+    width: 80px; /* حجم الشعار */
     height: auto;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 h1 {
-    font-size: 24px;
-    color: #333; /* لون النص */
+    font-size: 28px; /* حجم الخط */
     margin: 0;
     text-align: center;
+    font-weight: 600;
 }
 
 /* تنسيق أدوات التحكم بالتقرير */
 .report-controls {
     padding: 20px;
-    background-color: #f9f9f9; /* خلفية فاتحة لأدوات التحكم */
+    background-color: #fff; /* خلفية بيضاء لأدوات التحكم */
     border-bottom: 2px solid #ccc;
     text-align: center;
+    margin: 20px 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+    border-radius: 8px; /* حواف دائرية */
 }
 
 .filter-group {
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 .filter-group label {
     font-size: 16px;
     margin-right: 10px;
+    font-weight: 500;
 }
 
 .filter-group select,
 .filter-group input[type="date"] {
-    padding: 5px;
+    padding: 8px 12px; /* تباعد داخلي أفضل */
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.filter-group select:focus,
+.filter-group input[type="date"]:focus {
+    border-color: #3f51b5; /* لون الحواف عند التفاعل */
 }
 
 /* تنسيق زر توليد التقرير */
 .btn-generate {
-    padding: 10px 20px;
+    padding: 12px 25px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #2196F3;
+    background-color: #3f51b5; /* لون مميز للزر */
     color: white;
     border: none;
     border-radius: 5px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn-generate:hover {
-    background-color: #0b7dda;
+    background-color: #303f9f;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* ظل عند التفاعل */
 }
 
 /* تنسيق نتائج التقرير */
 .report-results {
     padding: 20px;
+    margin: 20px 15px;
+    background-color: #fff; /* خلفية بيضاء للنتائج */
+    border-radius: 8px; /* حواف دائرية */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف */
 }
 
 #report-table {
@@ -77,44 +105,47 @@ h1 {
 
 #report-table th, #report-table td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px; /* تباعد أفضل */
     text-align: center;
     font-size: 14px;
 }
 
 #report-table th {
-    background-color: #f2f2f2;
+    background-color: #3f51b5; /* لون الرأس */
+    color: #fff; /* لون النص للرأس */
     font-weight: bold;
-    color: #333; /* لون النص */
 }
 
 /* تنسيق زر الطباعة */
 .btn-print {
-    margin: 10px;
-    padding: 10px 20px;
+    margin: 15px 0;
+    padding: 12px 25px;
     font-size: 16px;
     cursor: pointer;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn-print:hover {
     background-color: #45a049;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* ظل عند التفاعل */
 }
 
 /* تنسيق التذييل */
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #f9f9f9;
+    padding: 15px 0;
+    background-color: #f4f4f4; /* خلفية خفيفة */
     border-top: 2px solid #ccc;
+    font-size: 14px;
+    color: #555;
 }
 
 footer p {
     margin: 5px 0 0 0;
     font-size: 14px;
-    color: #555;
 }
