@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقارير الحضور والغياب</title>
+    <link rel="stylesheet" href="report-styles.css">
+    <script type="module">
+        // استيراد مكتبات Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+        // إعدادات Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDC1c9UIHn5d1SaWg1VeJwaWsRYE3aCCKU",
+            authDomain: "hadir-e1706.firebaseapp.com",
+            projectId: "hadir-e1706",
+            storageBucket: "hadir-e1706.appspot.com",
+            messagingSenderId: "216498723412",
+            appId: "1:216498723412:web:b83c70cd8500b3fba5abc1"
+        };
+
+        // تهيئة Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app); // تهيئة Firestore
+    </script>
+</head>
+<body>
+    <header>
+        <h1>تقارير الحضور والغياب</h1>
+    </header>
+    <section class="report-controls">
+        <div class="filter-group">
+            <label for="report-type">نوع التقرير:</label>
+            <select id="report-type">
+                <option value="daily">تقرير يومي</option>
+                <option value="weekly">تقرير أسبوعي</option>
+                <option value="monthly">تقرير شهري</option>
+                <option value="custom">تقرير مخصص</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="report-class">اختر الصف:</label>
+            <select id="report-class">
+                <option value="all">الكل</option>
+                <option value="5">الصف الخامس</option>
+                <option value="6">الصف السادس</option>
+                <option value="7">الصف السابع</option>
+                <option value="8">الصف الثامن</option>
+                <option value="9">الصف التاسع</option>
+            </select>
+        </div>
+        <div class="filter-group date-picker">
+            <label for="report-date">اختر التاريخ:</label>
+            <input type="date" id="report-date">
+        </div>
+        <div class="filter-group date-picker" style="display:none;">
+            <label for="start-date">تاريخ البداية:</label>
+            <input type="date" id="start-date">
+            <label for="end-date">تاريخ النهاية:</label>
+            <input type="date" id="end-date">
+        </div>
+        <button id="generate-report" class="btn-generate">توليد التقرير</button>
+    </section>
+    <section class="report-results">
+        <h2>نتائج التقرير</h2>
+        <table id="report-table">
+            <thead>
+                <tr>
+                    <th>اسم الطالب</th>
+                    <th>الصف</th>
+                    <th>الشعبة</th>
+                    <th>التاريخ</th>
+                    <th>الحصة</th>
+                    <th>الحالة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- سيتم إضافة الصفوف هنا بناءً على التقرير -->
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        <button id="download-pdf" class="btn-download">تحميل PDF</button>
+        <button id="print-report" class="btn-print">طباعة التقرير</button>
+    </footer>
+    <script src="report-script.js" type="module"></script>
+</body>
+</html>
