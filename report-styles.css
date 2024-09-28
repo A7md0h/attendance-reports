@@ -5,30 +5,87 @@
     justify-content: center;
     padding: 10px;
     border-bottom: 2px solid #ccc;
+    background-color: #f4f4f4; /* خلفية فاتحة للترويسة */
 }
 
 .school-logo {
     width: 100px; /* حجم الشعار */
+    height: auto;
     margin-right: 15px;
 }
 
 h1 {
     font-size: 24px;
+    color: #333; /* لون النص */
+    margin: 0;
     text-align: center;
 }
 
-/* تنسيق التذييل */
-footer {
+/* تنسيق أدوات التحكم بالتقرير */
+.report-controls {
+    padding: 20px;
+    background-color: #f9f9f9; /* خلفية فاتحة لأدوات التحكم */
+    border-bottom: 2px solid #ccc;
     text-align: center;
+}
+
+.filter-group {
+    margin: 10px 0;
+}
+
+.filter-group label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.filter-group select,
+.filter-group input[type="date"] {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* تنسيق زر توليد التقرير */
+.btn-generate {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-generate:hover {
+    background-color: #0b7dda;
+}
+
+/* تنسيق نتائج التقرير */
+.report-results {
+    padding: 20px;
+}
+
+#report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* ظل خفيف للجدول */
+}
+
+#report-table th, #report-table td {
+    border: 1px solid #ddd;
     padding: 10px;
-    background-color: #f9f9f9;
-    border-top: 2px solid #ccc;
+    text-align: center;
+    font-size: 14px;
 }
 
-footer p {
-    margin: 5px 0 0 0;
-    font-size: 14px;
-    color: #555;
+#report-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333; /* لون النص */
 }
 
 /* تنسيق زر الطباعة */
@@ -48,29 +105,16 @@ footer p {
     background-color: #45a049;
 }
 
-/* باقي التنسيقات */
-.report-controls {
-    padding: 20px;
+/* تنسيق التذييل */
+footer {
     text-align: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-top: 2px solid #ccc;
 }
 
-.filter-group {
-    margin: 10px 0;
-}
-
-#report-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-#report-table th, #report-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-#report-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+footer p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #555;
 }
