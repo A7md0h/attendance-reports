@@ -24,7 +24,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app); // تهيئة Firestore
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> <!-- تحميل jsPDF -->
 </head>
 <body>
     <header>
@@ -49,6 +48,20 @@
                 <option value="7">الصف السابع</option>
                 <option value="8">الصف الثامن</option>
                 <option value="9">الصف التاسع</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="report-period">اختر الحصة:</label>
+            <select id="report-period">
+                <option value="all">الكل</option>
+                <option value="1">الحصة الأولى</option>
+                <option value="2">الحصة الثانية</option>
+                <option value="3">الحصة الثالثة</option>
+                <option value="4">الحصة الرابعة</option>
+                <option value="5">الحصة الخامسة</option>
+                <option value="6">الحصة السادسة</option>
+                <option value="7">الحصة السابعة</option>
+                <option value="8">الحصة الثامنة</option>
             </select>
         </div>
         <div class="filter-group date-picker">
@@ -82,7 +95,6 @@
         </table>
     </section>
     <footer>
-        <button id="download-pdf" class="btn-download">تحميل PDF</button>
         <button id="print-report" class="btn-print">طباعة التقرير</button>
     </footer>
     <script src="report-script.js" type="module"></script>
