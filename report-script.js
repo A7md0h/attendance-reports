@@ -27,6 +27,16 @@ window.addEventListener('DOMContentLoaded', () => {
     const reportTableBody = document.getElementById('report-table').querySelector('tbody');
     const printButton = document.getElementById('print-report');
 
+    // دالة لتحويل التاريخ المدخل إلى بداية اليوم (للمقارنة الدقيقة)
+    function getStartOfDay(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
+    }
+
+    // دالة لتحويل التاريخ المدخل إلى نهاية اليوم (للمقارنة الدقيقة)
+    function getEndOfDay(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999);
+    }
+
     // دالة توليد التقرير
     async function generateReport() {
         const reportType = reportTypeSelect.value;
@@ -40,6 +50,8 @@ window.addEventListener('DOMContentLoaded', () => {
         reportTableBody.innerHTML = '';
 
         let q;
+        let dateQuery;
+
         if (selectedClass === 'all') {
             // جلب جميع الصفوف
             q = query(collection(db, "attendance"));
@@ -48,8 +60,27 @@ window.addEventListener('DOMContentLoaded', () => {
             q = query(collection(db, "attendance"), where("grade", "==", selectedClass));
         }
 
+        // إذا تم تحديد تاريخ التقرير، قم بتطبيق الفلترة بناءً على التاريخ
+        if (reportType === 'daily' && reportDate) {
+            const selectedDate = new Date(reportDate);
+            const startOfDay = getStartOfDay(selectedDate);
+            const endOfDay = getEndOfDay(selectedDate);
+            
+            // فلترة التقرير حسب التاريخ
+            dateQuery = query(q, where("timestamp", ">=", startOfDay), where("timestamp", "<=", endOfDay));
+        } else if (reportType === 'custom' && startDate && endDate) {
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            
+            // فلترة التقرير حسب الفترة المخصصة
+            dateQuery = query(q, where("timestamp", ">=", start), where("timestamp", "<=", end));
+        } else {
+            // إذا لم يتم تحديد تاريخ، استخدام الاستعلام الأساسي
+            dateQuery = q;
+        }
+
         try {
-            const querySnapshot = await getDocs(q);
+            const querySnapshot = await getDocs(dateQuery);
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 data.students.forEach((student) => {
